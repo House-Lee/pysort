@@ -22,7 +22,7 @@ def bubble_sort(src):
     n = len(src)
     for i in range(0 , n):
         isSorted = True
-        for j in range(0 , n - i):
+        for j in range(0 , n - i - 1):
             if (src[j] > src[j + 1]):
                 isSorted = False
                 tmp = src[j]
@@ -35,5 +35,5 @@ def bubble_sort(src):
     
 if (__name__ == "__main__"):
     src = [1,5,2,3,7,6,4]
-    print quick_sort(src, 0, len(src))
+    print bubble_sort(src)
     

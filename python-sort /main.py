@@ -15,10 +15,26 @@
 # limitations under the License.
 #
 import webapp2
+import mypysort
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        self.response.write('Hello world!')
+        sort = self.request.GET.get("sort")
+        if sort is None:
+            self.response.write("You must specify sort array")
+            return
+        sort = sort.split(",")
+        method = self.request.GET.get("method")
+        if method is None:
+            method = "quick"
+        if method == "quick":
+            src = mypysort.quick_sort(sort , 0 , len(sort))
+        elif method == "bubble":
+            src = mypysort.bubble_sort(sort)
+        else:
+            self.response.write("Method [%s] not support"%method)
+            return
+        self.response.write(",".join(src))
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler)
